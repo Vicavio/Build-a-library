@@ -21,7 +21,7 @@ class Media { //Create a parent class and the main constructor
     return this._ratings;
   }
   set ratings(vote) {
-    this._ratings = vote;
+    this._ratings.push(vote);
   }
   getAverageRating() {
     let average = this.ratings.reduce((a, b) => a + b);
@@ -31,7 +31,7 @@ class Media { //Create a parent class and the main constructor
     this._isCheckedOut = !this._isCheckedOut;
   }
   addRating(rating) {
-    this._ratings = rating;
+    this.ratings = rating;
   }
 }
 
@@ -76,10 +76,10 @@ class Movie extends Media {
 }
 
 class Cd extends Media {
-  constructor (title, artist) {
+  constructor (title, artist, songs) {
     super(title);
     this._artist = artist;
-    this._songs = [];
+    this._songs = songs;
   }
   get artist() {
     return this._artist;
@@ -91,13 +91,36 @@ class Cd extends Media {
     return this._songs;
   }
   set songs (nameOfSongs) {
-    this._songs = nameOfSongs;
+    this._songs.push(nameOfSongs);
   }
+  addSong(newSong) {
+    this.songs = newSong;
+  }
+  
 }
-const favoriteMovie = new Movie ("Everest", "Baltasar Kormákur", "2h"); //Create a new object based on the Movie subclass
-favoriteMovie.toggleCheckOutStatus();
-console.log(favoriteMovie.isCheckedOut);
-favoriteMovie.addRating(9);
-favoriteMovie.addRating(8);
-favoriteMovie.addRating(10);
-console.log(favoriteMovie.getAverageRating());
+const favBook = new Book ("Gone with the wind", "Margaret Mitchell", 1594)
+console.log(favBook);
+favBook.addRating(9);
+favBook.addRating(7);
+favBook.addRating(8);
+favBook.addRating(10);
+
+
+const favSong = new Cd ("Yellow", "Coldaplay", ["The Scientist", "Adventure of a life time", "Viva la vida", "Fix you"])
+console.log(favSong);
+favSong.toggleCheckOutStatus();
+favSong.addRating(9);
+favSong.addRating(8);
+favSong.addRating(10);
+favSong.addRating(10);
+
+const favMovie = new Movie ("Everest", "Baltasar Kormákur", 123); //Create a new object based on the Movie subclass
+console.log(favMovie);
+favMovie.toggleCheckOutStatus();
+favMovie.addRating(9);
+favMovie.addRating(8);
+favMovie.addRating(10);
+
+
+   
+ 
